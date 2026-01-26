@@ -24,8 +24,15 @@ const Footer: React.FC<FooterProps> = ({
   const addressLines = address.split(',').map(line => line.trim());
 
   const getDynamicHref = (href: string) => {
-    if (slug && !href.startsWith('#') && !href.startsWith('http')) {
-      return `${href}?preview=${slug}`;
+    if (slug) {
+      if (href.startsWith('#')) {
+        // If it's a hash link, go back to the preview homepage with the hash
+        return `/preview/${slug}${href}`;
+      }
+      if (!href.startsWith('http')) {
+        // If it's an internal link, append the preview query param
+        return `${href}?preview=${slug}`;
+      }
     }
     return href;
   }
