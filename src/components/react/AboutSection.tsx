@@ -1,14 +1,19 @@
 
 import React from 'react';
 
-const AboutSection: React.FC = () => {
+// Add businessName prop
+interface AboutSectionProps {
+  businessName?: string;
+}
+
+const AboutSection: React.FC<AboutSectionProps> = ({ businessName = "Rondebosch Laser" }) => {
   return (
     <section className="bg-white py-20 px-6 md:px-10" id="about">
       <div className="max-w-[1440px] mx-auto">
         <div className="mb-12">
           <span className="text-gray-400 text-sm flex items-center gap-2">
             <span className="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
-            About Us
+            About {businessName}
           </span>
         </div>
 
@@ -17,7 +22,7 @@ const AboutSection: React.FC = () => {
           {/* Left: Heading */}
           <div className="lg:w-2/3">
             <h2 className="text-4xl md:text-5xl lg:text-6xl text-nova-dark leading-tight font-medium">
-              At Rondebosch Laser, we combine <span className="font-serif italic font-normal text-gray-600">state-of-the-art technology</span> with expert care to deliver exceptional results. From laser hair removal to <span className="font-serif italic font-normal text-gray-600">advanced peels and cosmelan</span>, our goal is your absolute confidence.
+              At {businessName}, we combine <span className="font-serif italic font-normal text-gray-600">state-of-the-art technology</span> with expert care to deliver exceptional results. From laser hair removal to <span className="font-serif italic font-normal text-gray-600">advanced peels and cosmelan</span>, our goal is your absolute confidence.
             </h2>
           </div>
 

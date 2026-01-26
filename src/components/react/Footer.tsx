@@ -8,6 +8,7 @@ interface FooterProps {
   address?: string;
   email?: string;
   phone?: string;
+  slug?: string;
   onAdminClick?: () => void;
 }
 
@@ -16,10 +17,18 @@ const Footer: React.FC<FooterProps> = ({
   address = '15 Rondebosch Main Road, Cape Town, 7700',
   email = 'info@rondeboschlaser.com',
   phone = '+27 (21) 123-4567',
+  slug,
   onAdminClick
 }) => {
   // Split address into lines for display
   const addressLines = address.split(',').map(line => line.trim());
+
+  const getDynamicHref = (href: string) => {
+    if (slug && !href.startsWith('#') && !href.startsWith('http')) {
+      return `${href}?preview=${slug}`;
+    }
+    return href;
+  }
 
   return (
     <footer className="bg-nova-dark text-white py-16 px-6 md:px-10" id="contact">
@@ -40,7 +49,7 @@ const Footer: React.FC<FooterProps> = ({
             {NAV_LINKS.map(link => (
               <li key={link.label}>
                 <a
-                  href={link.href.startsWith('#') ? `/${link.href}` : link.href}
+                  href={getDynamicHref(link.href)}
                   className="text-gray-300 hover:text-white transition-colors"
                 >
                   {link.label}
@@ -48,7 +57,7 @@ const Footer: React.FC<FooterProps> = ({
               </li>
             ))}
             <li>
-              <a href="/services/laser-hair-removal" className="text-gray-300 hover:text-white transition-colors">
+              <a href={getDynamicHref("/services/laser-hair-removal")} className="text-gray-300 hover:text-white transition-colors">
                 Laser Hair Removal
               </a>
             </li>

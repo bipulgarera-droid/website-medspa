@@ -125,15 +125,14 @@ const MainApp: React.FC<MainAppProps> = ({ prospectData: initialData, slug: prop
         onOpenBooking={openBooking}
         businessName={prospectData?.businessName}
         logoUrl={prospectData?.logoUrl}
+        slug={slug} // Pass slug down
       />
 
       <main className="flex-grow">
-        {/* CommitmentSection is the visual Hero (Image) */}
         <CommitmentSection onOpenBooking={openBooking} />
-        {/* HeroSection is the Services Grid */}
         <HeroSection onOpenBooking={openBooking} />
 
-        <AboutSection />
+        <AboutSection businessName={prospectData?.businessName} />
 
         <TestimonialsSection />
       </main>
@@ -144,6 +143,7 @@ const MainApp: React.FC<MainAppProps> = ({ prospectData: initialData, slug: prop
         phone={prospectData?.phone}
         email={prospectData?.email}
         address={prospectData?.address}
+        slug={slug} // Pass slug down
       />
 
       {/* Floating Elements */}

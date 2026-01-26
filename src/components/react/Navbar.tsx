@@ -6,10 +6,11 @@ import { NAV_LINKS } from '../../constants';
 interface NavbarProps {
   businessName?: string;
   logoUrl?: string;
+  slug?: string; // New: Slug for persisting preview state
   onOpenBooking: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ businessName = 'RONDEBOSCH LASER', logoUrl, onOpenBooking }) => {
+const Navbar: React.FC<NavbarProps> = ({ businessName = 'RONDEBOSCH LASER', logoUrl, slug, onOpenBooking }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -18,6 +19,7 @@ const Navbar: React.FC<NavbarProps> = ({ businessName = 'RONDEBOSCH LASER', logo
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -25,15 +27,24 @@ const Navbar: React.FC<NavbarProps> = ({ businessName = 'RONDEBOSCH LASER', logo
     e.preventDefault();
     setIsMobileMenuOpen(false);
 
-    // If it's a home link (logo) or section link
-    if (href === '#' || href.startsWith('#')) {
-      // Check if we are on the homepage
-      if (window.location.pathname === '/' || window.location.pathname === '') {
-        // We are on homepage, scroll to section
-        if (href === '#') {
+    // Dynamic Link Logic
+    let targetHref = href;
+
+    // If it's a relative path (e.g. /services/laser-hair-removal) AND we have a slug
+    // We should keep the slug in URL query param to maintain branding
+    if (slug && !href.startsWith('#') && !href.startsWith('http')) {
+      const separator = href.includes('?') ? '&' : '?';
+      targetHref = `${href}${separator}preview=${slug}`;
+    }
+
+    // Hash links
+    if (targetHref.startsWith('#')) {
+      if (window.location.pathname === '/' || window.location.pathname === '' || window.location.pathname.includes('/preview/')) {
+        // Should work on preview page too since it's basically home
+        if (targetHref === '#') {
           window.scrollTo({ top: 0, behavior: "smooth" });
         } else {
-          const element = document.querySelector(href);
+          const element = document.querySelector(targetHref);
           if (element) {
             const offset = 100;
             const elementPosition = element.getBoundingClientRect().top;
@@ -42,14 +53,26 @@ const Navbar: React.FC<NavbarProps> = ({ businessName = 'RONDEBOSCH LASER', logo
           }
         }
       } else {
-        // We are NOT on homepage, navigate to homepage with hash
-        window.location.href = `/${href === '#' ? '' : href}`;
+        // Different page -> navigate home
+        const base = slug ? `/preview/${slug}` : '/';
+        window.location.href = `${base}${targetHref}`;
       }
     } else {
-      // Normal link
-      window.location.href = href;
+      // Normal navigation
+      window.location.href = targetHref;
     }
   };
+
+  // Helper to modify href on render for SEO/Standard click behavior
+  const getDynamicHref = (href: string) => {
+    if (slug && !href.startsWith('#') && !href.startsWith('http')) {
+      // Actually, for inner pages in this template (like services), they are separate Astro pages.
+      // We can just append ?preview=slug to them.
+      // The target page will need to read this param.
+      return `${href}?preview=${slug}`;
+    }
+    return href;
+  }
 
   // Dynamic classes based on scroll state
   const navBgClass = isScrolled
@@ -93,7 +116,7 @@ const Navbar: React.FC<NavbarProps> = ({ businessName = 'RONDEBOSCH LASER', logo
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}
-              href={link.href.startsWith('#') ? `/${link.href}` : link.href}
+              href={getDynamicHref(link.href)}
               onClick={(e) => handleNavClick(e, link.href)}
               className={`text-sm font-medium transition-colors cursor-pointer ${navTextClass}`}
             >
@@ -117,7 +140,7 @@ const Navbar: React.FC<NavbarProps> = ({ businessName = 'RONDEBOSCH LASER', logo
           {NAV_LINKS.map((link) => (
             <a
               key={link.label}
-              href={link.href.startsWith('#') ? `/${link.href}` : link.href}
+              href={getDynamicHref(link.href)}
               onClick={(e) => handleNavClick(e, link.href)}
               className="text-lg font-medium text-gray-800 cursor-pointer"
             >
