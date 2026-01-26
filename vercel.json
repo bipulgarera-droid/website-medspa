@@ -1,0 +1,11 @@
+{
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "framework": "astro",
+    "buildCommand": "npm run build",
+    "outputDirectory": ".vercel/output",
+    "functions": {
+        ".vercel/output/functions/**/*.func": {
+            "runtime": "nodejs20.x"
+        }
+    }
+}
