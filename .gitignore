@@ -1,1 +1,2 @@
 node_modules\n.DS_Store\n.env\n.env.local\n.astro\n.vercel
+.vercel

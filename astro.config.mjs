@@ -7,7 +7,9 @@ import vercel from '@astrojs/vercel/serverless';
 // https://astro.build/config
 export default defineConfig({
   output: 'hybrid', // SSG by default, SSR for dynamic routes
-  adapter: vercel(),
+  adapter: vercel({
+    runtime: 'nodejs20.x'
+  }),
   integrations: [
     react(),
     tailwind({
