@@ -38,8 +38,9 @@ const MainApp: React.FC<MainAppProps> = ({ prospectData: initialData, slug }) =>
     if (slug && !initialData) {
       const fetchProspect = async () => {
         try {
+          // Select contact_info JSONB along with other fields
           const response = await fetch(
-            `${SUPABASE_URL}/rest/v1/personalized_previews?slug=eq.${encodeURIComponent(slug)}&select=business_name,logo_url,phone,email,address`,
+            `${SUPABASE_URL}/rest/v1/personalized_previews?slug=eq.${encodeURIComponent(slug)}&select=business_name,logo_url,contact_info`,
             {
               headers: {
                 'apikey': SUPABASE_ANON_KEY,
@@ -52,12 +53,14 @@ const MainApp: React.FC<MainAppProps> = ({ prospectData: initialData, slug }) =>
             const data = await response.json();
             if (data && data.length > 0) {
               const prospect = data[0];
+              const contactInfo = prospect.contact_info || {};
+
               setProspectData({
                 businessName: prospect.business_name,
                 logoUrl: prospect.logo_url,
-                phone: prospect.phone,
-                email: prospect.email,
-                address: prospect.address,
+                phone: contactInfo.phone,
+                email: contactInfo.email,
+                address: contactInfo.address,
               });
             }
           }
