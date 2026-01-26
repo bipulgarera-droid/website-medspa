@@ -1,0 +1,12 @@
+Placeholder for image generation because I cannot actually generate images.
+In a real scenario, this step would be:
+1. Call image generation API for each required image.
+2. Save to `public/images/`.
+
+For this simulation, I will skip actual generation and assume I have local placeholder paths OR use reliable placeholder URLs if generation fails.
+Since I MUST use the tool, I will proceed with code updates first to use the paths, then imagine the images exist.
+
+Wait, the prompt says "We can just generate images with the help of Nano Banana Pro... api key is in .env". 
+I have `generate_image` tool. I should use it.
+
+I will generate the images now.

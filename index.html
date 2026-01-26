@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rondebosch Laser - Advanced Skin Care</title>
+    
+    <!-- Robust Polyfills: Execute immediately -->
+    <script>
+      // Global Polyfills for Node.js dependencies
+      window.process = {
+        env: { NODE_ENV: 'production' },
+        version: '',
+        nextTick: function(cb) { setTimeout(cb, 0); },
+        cwd: function() { return '/'; },
+        platform: 'browser'
+      };
+      window.global = window;
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Manrope', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            colors: {
+              'nova-gray': '#F5F5F5',
+              'nova-dark': '#1A1A1A',
+              'nova-text': '#2D2D2D',
+              'nova-teal': '#00BFA5',
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Smooth scrolling */
+      html { 
+        scroll-behavior: smooth;
+        scroll-padding-top: 100px; /* Offset for fixed navbar */
+      }
+      /* Custom scrollbar to match aesthetic */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #111; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #333; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #444; 
+      }
+      
+      .animate-pulse-slow {
+        animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "react-dom": "https://esm.sh/react-dom@18.2.0",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "lucide-react": "https://esm.sh/lucide-react@0.263.1",
+    "buffer": "https://esm.sh/buffer@6.0.3",
+    "@google/genai": "https://esm.sh/@google/genai@^1.38.0",
+    "astro/": "https://esm.sh/astro@^5.16.15/",
+    "@astrojs/tailwind": "https://esm.sh/@astrojs/tailwind@^6.0.2",
+    "@astrojs/react": "https://esm.sh/@astrojs/react@^4.4.2"
+  }
+}
+</script>
+<script type="module">
+  import { Buffer } from 'buffer';
+  window.Buffer = Buffer;
+  window.global.Buffer = Buffer;
+</script>
+<!-- Robust SDK Loader with Fallbacks -->
+<script type="module">
+  async function loadSDK() {
+    // Priority based on successful logs:
+    // 1. esm.sh latest (worked in logs)
+    // 2. esm.sh versioned (failed in logs, but kept as backup)
+    // 3. jsdelivr (backup)
+    const sources = [
+      'https://esm.sh/@google/genai', 
+      'https://esm.sh/@google/genai@0.2.1', 
+      'https://cdn.jsdelivr.net/npm/@google/genai@0.2.1/+esm'
+    ];
+
+    for (const src of sources) {
+      try {
+        console.log(`[SDK Loader] Attempting: ${src}`);
+        const module = await import(src);
+        if (module && module.GoogleGenAI) {
+          // Wait for Buffer to be available if it's being loaded asynchronously
+          if (!window.Buffer) {
+              console.warn("Buffer not yet available, waiting...");
+              await new Promise(r => setTimeout(r, 100));
+          }
+          window.GoogleGenAI = module.GoogleGenAI;
+          console.log(`[SDK Loader] Success from: ${src}`);
+          return;
+        }
+      } catch (err) {
+        console.warn(`[SDK Loader] Failed: ${src}`, err.message);
+      }
+    }
+    console.error("[SDK Loader] All attempts failed.");
+  }
+  loadSDK();
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-nova-gray text-nova-text">
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

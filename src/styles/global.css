@@ -1,0 +1,39 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { 
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+  }
+}
+
+/* Custom scrollbar to match aesthetic */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #111; 
+}
+::-webkit-scrollbar-thumb {
+  background: #333; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #444; 
+}
+
+.animate-pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
