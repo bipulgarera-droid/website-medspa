@@ -27,10 +27,25 @@ interface MainAppProps {
 const SUPABASE_URL = 'https://fjbowxwqaegvpjyinnsa.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqYm93eHdxYWVndnBqeWlubnNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwODc3NDUsImV4cCI6MjA3OTY2Mzc0NX0.FOPlfwF7kHhwSPhW1nlxeQ9TNBmkztEd2sQFYQ7C-SI';
 
-const MainApp: React.FC<MainAppProps> = ({ prospectData: initialData, slug }) => {
+const MainApp: React.FC<MainAppProps> = ({ prospectData: initialData, slug: propSlug }) => {
   const [view, setView] = useState<'home' | 'admin'>('home');
   const [isBookingOpen, setIsBookingOpen] = useState(false);
   const [prospectData, setProspectData] = useState<ProspectData | undefined>(initialData);
+
+  // Derive slug from URL if not provided
+  const [slug, setSlug] = useState<string | undefined>(propSlug);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && !propSlug) {
+      // Url format: /preview/SLUG or /preview/SLUG/
+      const pathParts = window.location.pathname.split('/');
+      const previewIndex = pathParts.indexOf('preview');
+      if (previewIndex !== -1 && pathParts[previewIndex + 1]) {
+        setSlug(pathParts[previewIndex + 1]);
+      }
+    }
+  }, [propSlug]);
+
   const [isLoading, setIsLoading] = useState(!!slug && !initialData);
 
   // Fetch prospect data client-side if slug is provided
@@ -38,6 +53,7 @@ const MainApp: React.FC<MainAppProps> = ({ prospectData: initialData, slug }) =>
     if (slug && !initialData) {
       const fetchProspect = async () => {
         try {
+          setIsLoading(true);
           // Select contact_info JSONB along with other fields
           const response = await fetch(
             `${SUPABASE_URL}/rest/v1/personalized_previews?slug=eq.${encodeURIComponent(slug)}&select=business_name,logo_url,contact_info`,
