@@ -24,8 +24,9 @@ interface MainAppProps {
 }
 
 // Supabase config
-const SUPABASE_URL = 'https://fjbowxwqaegvpjyinnsa.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZqYm93eHdxYWVndnBqeWlubnNhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQwODc3NDUsImV4cCI6MjA3OTY2Mzc0NX0.FOPlfwF7kHhwSPhW1nlxeQ9TNBmkztEd2sQFYQ7C-SI';
+// Supabase config
+const SUPABASE_URL = import.meta.env.PUBLIC_SUPABASE_URL;
+const SUPABASE_ANON_KEY = import.meta.env.PUBLIC_SUPABASE_ANON_KEY;
 
 const MainApp: React.FC<MainAppProps> = ({ prospectData: initialData, slug: propSlug }) => {
   const [view, setView] = useState<'home' | 'admin'>('home');

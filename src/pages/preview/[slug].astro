@@ -1,0 +1,11 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import MainApp from '../../components/react/MainApp';
+
+export const prerender = false;
+const { slug } = Astro.params;
+---
+
+<MainLayout title="Voice AI Template">
+  <MainApp client:only="react" slug={slug} />
+</MainLayout>

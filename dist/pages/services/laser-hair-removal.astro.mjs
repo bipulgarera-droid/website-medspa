@@ -1,0 +1,34 @@
+import { c as createComponent, r as renderComponent, a as renderTemplate, m as maybeRenderHead } from '../../chunks/astro/server_BTE7SAEk.mjs';
+import 'kleur/colors';
+import 'html-escaper';
+import { $ as $$MainLayout } from '../../chunks/MainLayout_CqwsFml9.mjs';
+export { renderers } from '../../renderers.mjs';
+
+const $$LaserHairRemoval = createComponent(($$result, $$props, $$slots) => {
+  return renderTemplate`${renderComponent($$result, "MainLayout", $$MainLayout, { "title": "Laser Hair Removal", "description": "Premium laser hair removal services." }, { "default": ($$result2) => renderTemplate` ${renderComponent($$result2, "ClientProspectWrapper", null, { "client:only": "react", "client:component-hydration": "only", "client:component-path": "/Users/bipul/Downloads/ALL WORKSPACES/rondebosch-laser-hair-removal---with-dashboard/src/components/react/ClientProspectWrapper", "client:component-export": "default" }, { "default": ($$result3) => renderTemplate`  ${maybeRenderHead()}<section class="bg-black text-white py-24 px-6 md:px-10"> <div class="max-w-4xl mx-auto text-center"> <p class="text-nova-teal text-xs font-bold tracking-[0.3em] uppercase mb-4">Our Signature Treatment</p> <h1 class="font-serif text-4xl md:text-6xl font-light mb-6">Laser Hair Removal</h1> <p class="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
+Experience the freedom of smooth, hair-free skin with our advanced laser technology. 
+          Safe for all skin types, with long-lasting results.
+</p> </div> </section>  <section class="py-20 px-6 md:px-10 bg-white"> <div class="max-w-5xl mx-auto"> <h2 class="font-serif text-3xl md:text-4xl text-center mb-16 text-nova-text">Why Choose Laser Hair Removal?</h2> <div class="grid grid-cols-1 md:grid-cols-3 gap-8"> <div class="text-center p-8 bg-nova-gray rounded-2xl"> <div class="w-16 h-16 mx-auto mb-6 bg-nova-teal/10 rounded-full flex items-center justify-center"> <span class="text-nova-teal text-2xl">✓</span> </div> <h3 class="font-semibold text-lg mb-3 text-nova-text">Long-Lasting Results</h3> <p class="text-gray-500 text-sm leading-relaxed">
+Unlike shaving or waxing, laser hair removal provides permanent reduction after a series of treatments.
+</p> </div> <div class="text-center p-8 bg-nova-gray rounded-2xl"> <div class="w-16 h-16 mx-auto mb-6 bg-nova-teal/10 rounded-full flex items-center justify-center"> <span class="text-nova-teal text-2xl">⚡</span> </div> <h3 class="font-semibold text-lg mb-3 text-nova-text">Quick Sessions</h3> <p class="text-gray-500 text-sm leading-relaxed">
+Small areas like underarms can be treated in minutes. Even larger areas like legs take under an hour.
+</p> </div> <div class="text-center p-8 bg-nova-gray rounded-2xl"> <div class="w-16 h-16 mx-auto mb-6 bg-nova-teal/10 rounded-full flex items-center justify-center"> <span class="text-nova-teal text-2xl">💎</span> </div> <h3 class="font-semibold text-lg mb-3 text-nova-text">All Skin Types</h3> <p class="text-gray-500 text-sm leading-relaxed">
+Our advanced technology is safe and effective for all skin tones and hair types.
+</p> </div> </div> </div> </section>  <section class="py-20 px-6 md:px-10 bg-nova-gray"> <div class="max-w-5xl mx-auto"> <h2 class="font-serif text-3xl md:text-4xl text-center mb-16 text-nova-text">Treatment Areas</h2> <div class="grid grid-cols-2 md:grid-cols-4 gap-4"> <div class="bg-white p-6 rounded-xl text-center hover:shadow-lg transition-shadow border border-gray-100"><p class="text-nova-text font-medium">Face</p></div> <div class="bg-white p-6 rounded-xl text-center hover:shadow-lg transition-shadow border border-gray-100"><p class="text-nova-text font-medium">Underarms</p></div> <div class="bg-white p-6 rounded-xl text-center hover:shadow-lg transition-shadow border border-gray-100"><p class="text-nova-text font-medium">Arms</p></div> <div class="bg-white p-6 rounded-xl text-center hover:shadow-lg transition-shadow border border-gray-100"><p class="text-nova-text font-medium">Legs</p></div> <div class="bg-white p-6 rounded-xl text-center hover:shadow-lg transition-shadow border border-gray-100"><p class="text-nova-text font-medium">Bikini</p></div> <div class="bg-white p-6 rounded-xl text-center hover:shadow-lg transition-shadow border border-gray-100"><p class="text-nova-text font-medium">Back</p></div> <div class="bg-white p-6 rounded-xl text-center hover:shadow-lg transition-shadow border border-gray-100"><p class="text-nova-text font-medium">Chest</p></div> <div class="bg-white p-6 rounded-xl text-center hover:shadow-lg transition-shadow border border-gray-100"><p class="text-nova-text font-medium">Full Body</p></div> </div> </div> </section>  <section class="py-20 px-6 md:px-10 bg-black text-white"> <div class="max-w-3xl mx-auto text-center"> <h2 class="font-serif text-3xl md:text-4xl mb-6">Ready to Start Your Journey?</h2> <p class="text-gray-400 mb-8">Book a free consultation to discuss your goals and create a personalized treatment plan.</p> <button class="inline-block px-8 py-4 bg-nova-teal text-white font-semibold rounded-full hover:bg-nova-teal/90 transition-colors">
+Book Consultation
+</button> </div> </section> ` })} ` })}`;
+}, "/Users/bipul/Downloads/ALL WORKSPACES/rondebosch-laser-hair-removal---with-dashboard/src/pages/services/laser-hair-removal.astro", void 0);
+
+const $$file = "/Users/bipul/Downloads/ALL WORKSPACES/rondebosch-laser-hair-removal---with-dashboard/src/pages/services/laser-hair-removal.astro";
+const $$url = "/services/laser-hair-removal";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  default: $$LaserHairRemoval,
+  file: $$file,
+  url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };
