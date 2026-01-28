@@ -103,22 +103,11 @@ const Navbar: React.FC<NavbarProps> = ({ businessName = 'RONDEBOSCH LASER', logo
               alt={businessName}
               className="h-8 md:h-10 max-w-[180px] object-contain"
               style={{
-                // Smart filter logic:
-                // - On hero (not scrolled): Show white logo (invert dark logos to white)
-                // - On scrolled navbar (white bg): Show dark logo (invert white logos to dark)
-                filter: (() => {
-                  const isWhiteLogo = logoUrl.toLowerCase().includes('white');
-                  const isOnWhiteBg = isScrolled || isMobileMenuOpen;
-
-                  if (isWhiteLogo && isOnWhiteBg) {
-                    // White logo on white bg -> make it black
-                    return 'invert(1) brightness(0)';
-                  } else if (!isWhiteLogo && !isOnWhiteBg) {
-                    // Dark logo on dark hero -> make it white
-                    return 'brightness(0) invert(1)';
-                  }
-                  return 'none';
-                })()
+                // Only invert explicitly white logos when on white background
+                // Don't auto-invert dark logos as this breaks non-transparent images
+                filter: (
+                  logoUrl.toLowerCase().includes('white') && (isScrolled || isMobileMenuOpen)
+                ) ? 'invert(1) brightness(0.2)' : 'none'
               }}
             />
           ) : (
