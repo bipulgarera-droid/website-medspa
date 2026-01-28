@@ -78,8 +78,7 @@ const Footer: React.FC<FooterProps> = ({
             {addressLines.map((line, i) => (
               <p key={i}>{line}</p>
             ))}
-            <p className="pt-2 hover:text-white cursor-pointer">{email}</p>
-            <p className="hover:text-white cursor-pointer">{phone}</p>
+            <p className="pt-2 hover:text-white cursor-pointer">{phone}</p>
           </address>
         </div>
 
