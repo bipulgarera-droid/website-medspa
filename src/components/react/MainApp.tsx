@@ -79,6 +79,10 @@ const MainApp: React.FC<MainAppProps> = ({ prospectData: initialData, slug: prop
                 email: contactInfo.email,
                 address: contactInfo.address,
               });
+
+              if (prospect.business_name) {
+                document.title = `${prospect.business_name} | Website Preview`;
+              }
             }
           }
         } catch (error) {
