@@ -63,11 +63,7 @@ const Footer: React.FC<FooterProps> = ({
                 </a>
               </li>
             ))}
-            <li>
-              <a href={getDynamicHref("/services/laser-hair-removal")} className="text-gray-300 hover:text-white transition-colors">
-                Laser Hair Removal
-              </a>
-            </li>
+
           </ul>
         </div>
 
