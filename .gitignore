@@ -1,2 +1,7 @@
-node_modules\n.DS_Store\n.env\n.env.local\n.astro\n.vercel
+node_modules
+.DS_Store
+.env
+.env.local
+.astro
 .vercel
+dist
