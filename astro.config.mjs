@@ -6,7 +6,7 @@ import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'static', // Static mode with Vercel adapter supports SSR pages automatically in v5
+  output: 'server', // Server mode required for SSR pages (prerender: false) in Astro v5
   adapter: vercel(),
   integrations: [
     react(),
