@@ -2,12 +2,10 @@
 import { defineConfig } from 'astro/config';
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
-import vercel from '@astrojs/vercel';
 
 // https://astro.build/config
 export default defineConfig({
-  output: 'server', // Server mode required for SSR pages (prerender: false) in Astro v5
-  adapter: vercel(),
+  output: 'static', // Pure static build, client-side data fetching
   integrations: [
     react(),
     tailwind({
