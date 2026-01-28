@@ -101,13 +101,23 @@ const Navbar: React.FC<NavbarProps> = ({ businessName = 'RONDEBOSCH LASER', logo
             <img
               src={logoUrl}
               alt={businessName}
-              className="h-8 md:h-10 max-w-[180px] object-contain"
+              className="h-12 md:h-14 max-w-[220px] object-contain"
               style={{
-                // Only invert explicitly white logos when on white background
-                // Don't auto-invert dark logos as this breaks non-transparent images
-                filter: (
-                  logoUrl.toLowerCase().includes('white') && (isScrolled || isMobileMenuOpen)
-                ) ? 'invert(1) brightness(0.2)' : 'none'
+                // Add drop shadow for visibility on dark backgrounds
+                // Remove background for logos with white backgrounds on hero
+                filter: (() => {
+                  const isOnWhiteBg = isScrolled || isMobileMenuOpen;
+                  const hasWhiteInName = logoUrl.toLowerCase().includes('white');
+
+                  if (hasWhiteInName && isOnWhiteBg) {
+                    // White logo on white bg -> make it dark
+                    return 'invert(1) brightness(0.2)';
+                  } else if (!isOnWhiteBg) {
+                    // On dark hero, add subtle drop shadow for visibility
+                    return 'drop-shadow(0 2px 4px rgba(0,0,0,0.5))';
+                  }
+                  return 'none';
+                })()
               }}
             />
           ) : (
